@@ -13,7 +13,7 @@ def phiprime(P, Q):
     return (P - 1) * (Q - 1)
 
 
-def exp_mod(base, exponent, mod):  # for big numbers , but basicly the same as (base ** exponent) % mod
+def exp_mod(base, exponent, mod):  # for big numbers , but basicly tqhe same as (base ** exponent) % mod
     import gdi.numberConverter as gdi
     out = 1
     bin = gdi.dez2bin(exponent)
