@@ -19,9 +19,8 @@ def prf_prim(ein):
  
  
 def main():
-    prf_prim(24)
-    prf_prim(0)
-    prf_prim(105)
+    prf_prim(26543)
+
  
  
 if __name__ == '__main__':
