@@ -1,0 +1,11 @@
+#Erwartungswert
+Ex= summe i=1 bis n aus P(x=xi)*xi
+Xi= ein bestimmter Wert
+P(x=xi) = Wahrscheinlichkeit für dad eintreffen dieses wertes
+n=anzahl an bestimmten Werten
+
+#Varianz
+Vx= summe i=1 bis m aus (xi-Ex)^2*P(x=xi)
+
+#standartabweichung 
+sigma=sqrt(Vx)
