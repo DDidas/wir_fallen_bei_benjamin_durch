@@ -13,6 +13,6 @@ def phi_func(x):
     else:
         n = [y for y in range(1,x) if is_coprime(x,y)]
         return len(n)
+
+# Eingabe für Eulersche Phi Funktion
 print(phi_func(10))
-print(phi_func(15))
-print(phi_func(33))
