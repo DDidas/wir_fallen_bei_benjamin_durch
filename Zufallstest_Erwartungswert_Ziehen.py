@@ -148,6 +148,7 @@ def convert_2_NmalZiehenZufallsExperiment(züge, experiment: Zufallsexperiment):
 
 
 if __name__ == '__main__':
+    import Mengen
 
     def kRG3ZufallsGröße(ereig):
         # anzahl gezogener Grüner Kugeln
