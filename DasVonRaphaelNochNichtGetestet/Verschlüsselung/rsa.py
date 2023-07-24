@@ -62,7 +62,7 @@ def decode(_e, _N, m):
 if __name__ == '__main__':
     _split = 2
     MESSAGE = "MEIN WORT "
-    e, d, N = generate_keys(p=47, q=61)
+    e, d, N = generate_keys(p=53, q=61)
     if N < 27*10**_split:
         raise Exception("N to small\n mach den _split kleiner")
     if len(MESSAGE) % _split != 0:
