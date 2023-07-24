@@ -1,0 +1,8 @@
+#Bedingte wahrscheinlichkeit
+P(A|B)=P(A∩B)*P(B)
+P(A∩B)=P(A)*P(B) #wenn Erreignisse unabhängig
+
+#Satz von Bayes
+P(A|B) = (P(B|A)*P(A))/P(B)
+#P(A) bzw B ist die Einzelwahrscheinlichkeit
+#P(A|B) wahrscheinlichkeit für A vorrausgesetzt B ist eingetreten
