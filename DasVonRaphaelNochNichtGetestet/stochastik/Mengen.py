@@ -13,3 +13,5 @@ def schnitt(A,B):
             if a == b:
                 out.append(a)
     return out
+
+
