@@ -1,27 +1,27 @@
-import numpy as np
-from scipy import stats
+import scipy.stats as stats
 
-# Apfelmasse Daten
-data = list(map(int, input("Bitte geben Sie die Massen der Äpfel ein (getrennt durch '&'): ").split('&')))
+def confidence_interval_sigma_square(x, s_square, n, gamma):
+    # Berechnung der Freiheitsgrade
+    df = n - 1
 
-# Mittelwert (Erwartungswert)
-mean = np.mean(data)
-print(f'Punktschätzungen für Erwartungswert, 𝑥̄ = {mean:.2f} g')
+    # Berechnung der Vertrauensgrenzen c1 und c2
+    c1 = stats.chi2.ppf((1 - gamma) / 2, df)
+    print(c1)
+    c2 = stats.chi2.ppf(1 - (1 - gamma) / 2, df)
+    print(c2)
 
-# Unverzerrte Stichprobenvarianz
-variance = np.var(data, ddof=1)
-print(f'Punktschätzungen für Varianz, 𝑠² = {variance:.2f} g²')
+    # Berechnung des Konfidenzintervalls für sigma^2
+    lower_bound = (n - 1) * s_square / c2
+    upper_bound = (n - 1) * s_square / c1
 
-# Eingabe des Konfidenzniveaus (alpha) von der Konsole
-alpha = float(input("Geben Sie das Konfidenzniveau (z.B. 0.1 für 90% oder 0.05 für 95%): "))
+    return lower_bound, upper_bound
 
-# Konfidenzintervall für den Mittelwert
-sem = stats.sem(data)
-ci_mean = stats.t.interval(1-alpha, len(data)-1, loc=mean, scale=sem)
-print(f'Konfidenzintervall für Erwartungswert, {ci_mean[0]:.2f} ≤ 𝜇 ≤ {ci_mean[1]:.2f}')
+if __name__ == "__main__":
+    x = float(input("Geben Sie den Stichprobenmittelwert x ein: "))
+    s_square = float(input("Geben Sie die empirische Varianz s^2 ein: "))
+    n = int(input("Geben Sie die Stichprobengröße n ein: "))
+    gamma = float(input("Geben Sie das Konfidenzniveau gamma (z.B. 0.9 für 90%): "))
 
-# Konfidenzintervall für die Varianz
-df = len(data) - 1
-ci_variance = [df * variance / stats.chi2.ppf(1 - alpha/2, df),
-               df * variance / stats.chi2.ppf(alpha/2, df)]
-print(f'Konfidenzintervall für Varianz, 𝜎² gilt {ci_variance[0]:.2f} ≤ 𝜎² ≤ {ci_variance[1]:.2f}')
+    lower_bound, upper_bound = confidence_interval_sigma_square(x, s_square, n, gamma)
+
+    print(f"Das Konfidenzintervall für sigma^2 ist: [{lower_bound}, {upper_bound}]")

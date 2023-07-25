@@ -1,9 +1,6 @@
 import numpy as np
 from scipy import stats
 
-
-#Eingabe in diesem Script durch den Plain MAth Tabellenteil unten, mit den ganzen & getrennt und so, wie in probeklausur. u know?
-
 # Apfelmasse Daten
 data = list(map(int, input("Bitte geben Sie die Massen der Äpfel ein (getrennt durch '&'): ").split('&')))
 
@@ -15,8 +12,8 @@ print(f'Punktschätzungen für Erwartungswert, 𝑥̄ = {mean:.2f} g')
 variance = np.var(data, ddof=1)
 print(f'Punktschätzungen für Varianz, 𝑠² = {variance:.2f} g²')
 
-# Konfidenzniveau
-alpha = 0.05 # für 95% Konfidenzintervall
+# Eingabe des Konfidenzniveaus (alpha) von der Konsole
+alpha = float(input("Geben Sie das Konfidenzniveau (z.B. 0.1 für 90% oder 0.05 für 95%): "))
 
 # Konfidenzintervall für den Mittelwert
 sem = stats.sem(data)
