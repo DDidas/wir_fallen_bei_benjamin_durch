@@ -4,10 +4,8 @@ def gcd(p, q):
         p, q = q, p % q
     return p
 
-
 def is_coprime(x, y):
     return gcd(x, y) == 1
-
 
 def phi_func(x):
     if x == 1:
@@ -16,6 +14,11 @@ def phi_func(x):
         n = [y for y in range(1, x) if is_coprime(x, y)]
         return len(n)
 
+while True:
+    # Eingabe für Eulersche Phi Funktion
+    x = int(input("Bitte geben Sie eine Zahl für die Eulersche Phi-Funktion ein: "))
+    print(phi_func(x))
 
-# Eingabe für Eulersche Phi Funktion
-print(phi_func(10))
+    fortsetzen = input('Möchten Sie fortfahren? (y/n): ')
+    if fortsetzen.lower() != 'y':
+        break

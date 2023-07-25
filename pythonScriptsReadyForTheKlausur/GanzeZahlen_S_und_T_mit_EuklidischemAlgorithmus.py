@@ -6,8 +6,8 @@ def erweiterter_euklidischer_algorithmus(a, b):
         return ggt, y - (b // a) * x, x
 
 def main():
-    a = int(input("Geben Sie den ersten Wert ein: "))
-    b = int(input("Geben Sie den zweiten Wert ein: "))
+    a = int(input("Geben Sie den ersten Wert des ggT ein: "))
+    b = int(input("Geben Sie den zweiten Wert des ggT ein: "))
     ggt, s, t = erweiterter_euklidischer_algorithmus(a, b)
     print(f"ggT({a}, {b}) = {ggt} = {s}*{a} + {t}*{b}")
 

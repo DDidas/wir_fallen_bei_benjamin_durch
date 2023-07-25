@@ -13,8 +13,8 @@ def multiplikatives_inverse(a, m):
         return x % m
 
 def main():
-    a = int(input("Geben Sie den Wert für a ein (Multiplaktiv Inverses von _ ): "))
-    m = int(input("Geben Sie das Modul ein (!! Z !!): "))
+    a = int(input("Geben Sie den Wert für a ein Multiplaktiv Inverses von (_): "))
+    m = int(input("Geben Sie das Modul ein (Z): "))
     inverse = multiplikatives_inverse(a, m)
     print(f"Das multiplikative Inverse von {a} mod {m} ist {inverse}")
 
