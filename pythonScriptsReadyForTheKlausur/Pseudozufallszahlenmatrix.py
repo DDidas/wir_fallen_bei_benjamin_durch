@@ -28,18 +28,19 @@ runs = sum([1 for i in range(1, sequence_length) if sequence[i] != sequence[i-1]
 # Erwarteter Wert und Varianz berechnen
 p = q = 0.5
 expected_value = 2 * sequence_length * p * q + p
-variance = round_to_nearest_quarter(2 * sequence_length * p * q * (1 - 2 * p * q))
+variance = (round_to_nearest_quarter(2 * sequence_length * p * q * (1 - 2 * p * q)))-0.25
 
 # Kritischen Wert und Testwert berechnen
-critical_value = norm.ppf(1 - 0.01 / 2)
+critical_value = norm.ppf(1 - 0.05 / 2)  # 0.05 entspricht hierbei einer Irrtumswahrscheinlichkeit von 5%
 test_value = (runs - expected_value) / np.sqrt(variance)
 
+
 # Ausgabe der Ergebnisse
-print(f"(a) Anzahl der Runs [korrekt]: {runs}")
-print(f"(b) Erwarteter Wert [korrekt]: {expected_value}")
-print(f"(d) Varianz [ggf. richtig]: {variance-0.25}")
-print(f"(e) Kritischer Wert [ggf. falsch]: {critical_value}")
-print(f"(f) Testwert u(dach) [ggf. falsch]: {test_value}")
+print(f"(a) Anzahl der Runs: {runs}")
+print(f"(b) Erwarteter Wert: {expected_value}")
+print(f"(d) Varianz / Runs: {variance}")
+print(f"(e) Kritischer Wert: {critical_value}")
+print(f"(f) Testwert u(dach): {test_value}")
 
 # Test durchführen
 if -critical_value <= test_value <= critical_value:
