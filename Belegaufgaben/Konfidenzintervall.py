@@ -6,8 +6,9 @@ def confidence_interval_sigma_square(x, s_square, n, gamma):
 
     # Berechnung der Vertrauensgrenzen c1 und c2
     c1 = stats.chi2.ppf((1 - gamma) / 2, df)
+    print(c1)
     c2 = stats.chi2.ppf(1 - (1 - gamma) / 2, df)
-    print("c1: "+c1 + " c2: "+c2)
+    print(c2)
 
     # Berechnung des Konfidenzintervalls für sigma^2
     lower_bound = (n - 1) * s_square / c2
