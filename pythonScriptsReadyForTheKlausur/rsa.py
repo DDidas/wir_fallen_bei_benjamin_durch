@@ -45,6 +45,8 @@ def rsa_encrypt_decrypt():
         print("6: Wandeln Sie die numerische Repräsentation in Text um")
         mode = int(input("Ihre Wahl: "))
 
+        if mode in [1] and e is None:
+            e = int(input("Bitte geben Sie den Wert für 'e' ein: "))
         if mode in [2, 3] and e is None:
             e = int(input("Bitte geben Sie den Wert für 'e' ein: "))
         if mode in [1, 2, 3, 5] and N is None:
