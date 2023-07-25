@@ -3,13 +3,18 @@ import sympy
 from sympy import mod_inverse
 
 def calculate_d(e, N):
-    p, q = sympy.factorint(N)
+    factors = sympy.factorint(N)
+    p, q = list(factors.keys())
     phi = (p-1) * (q-1)
     d = mod_inverse(e, phi)
     return d
 
 def text_to_numbers(text):
-    return ['{:02d}'.format(string.ascii_uppercase.index(c)+1) if c.isalpha() else '00' for c in text.upper()]
+    text = text.upper()
+    if len(text) % 2 != 0:
+        text += ' '
+    return ['{:02d}{:02d}'.format(string.ascii_uppercase.index(text[i])+1,
+                                  string.ascii_uppercase.index(text[i+1])+1) for i in range(0, len(text), 2)]
 
 def numbers_to_text(numbers):
     nums = [int(str(num)[i:i+2]) for num in numbers for i in range(0, len(str(num)), 2)]
@@ -18,11 +23,11 @@ def numbers_to_text(numbers):
 
 def encrypt_rsa(e, N, text):
     numbers = text_to_numbers(text)
-    return ['{:04d}'.format(pow(int(num), e, N)) for num in numbers]
+    return [pow(int(num), e, N) for num in numbers]
 
 def decrypt_rsa(d, N, encrypted):
-    return ['{:04d}'.format(pow(int(num), d, N)) for num in encrypted]
-
+    decrypted = [pow(int(num), d, N) for num in encrypted]
+    return decrypted
 
 def rsa_encrypt_decrypt():
     e = None
@@ -54,12 +59,12 @@ def rsa_encrypt_decrypt():
             print(f'd={d}')
         elif mode == 2:
             encrypted = encrypt_rsa(e, N, text)
-            print(f'Encrypted={"|".join(encrypted)}')
+            print(f'Encrypted={"|".join(map(str, encrypted))}')
         elif mode == 3:
             d = calculate_d(e, N)
             encrypted = encrypt_rsa(e, N, text)
             decrypted = decrypt_rsa(d, N, encrypted)
-            print(f'Encrypted={"|".join(encrypted)}\nDecrypted={"|".join(decrypted)}')
+            print(f'Encrypted={"|".join(map(str, encrypted))}\nDecrypted={"|".join(map(str, decrypted))}')
         elif mode == 4:
             numbers = text_to_numbers(text)
             print(f'Numbers={"|".join(numbers)}')
@@ -67,7 +72,7 @@ def rsa_encrypt_decrypt():
             encrypted_input = input("Bitte geben Sie den verschlüsselten Text ein (im Format: 5409|2588|5409 etc.): ")
             encrypted = list(map(int, encrypted_input.split("|")))
             decrypted = decrypt_rsa(d, N, encrypted)
-            print(f'Decrypted={"|".join(decrypted)}')
+            print(f'Decrypted={"|".join(map(str, decrypted))}')
         elif mode == 6:
             numbers = text.split("|")
             print(f'Text={numbers_to_text(numbers)}')
