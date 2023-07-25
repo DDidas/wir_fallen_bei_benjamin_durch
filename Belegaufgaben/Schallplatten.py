@@ -30,7 +30,7 @@ def calculate_probabilities():
     print("Die Wahrscheinlichkeit, dass eine Ausschussplatte von P4 stammt, liegt bei: ", P_A4)
 
     # Berechnung der Gesamtzahl der Ausschussplatten
-    A_total = ( A1 + A2 + A3 + A4 )/ 100
+    A_total = ( A1 + A2 + A3 + A4 )
 
     print("Die Gesamtzahl der Ausschussplatten an diesem Tag betrug: ", A_total)
 
