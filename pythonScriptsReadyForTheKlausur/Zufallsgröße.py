@@ -1,52 +1,30 @@
-def f(x, c):
-    if -1/2 <= x <= 3/2:
-        return c * (-x**2 + x + 34)
-    else:
-        return 0
+import numpy as np
+from scipy import stats
 
-def calculate_c():
-    from scipy.integrate import quad
-    from functools import partial
 
-    # Definieren der Funktion, die integriert werden soll
-    integrand = partial(f, c=1)  # Parameter c vorübergehend als 1 setzen
+#Eingabe in diesem Script durch den Plain MAth Tabellenteil unten, mit den ganzen & getrennt und so, wie in probeklausur. u know?
 
-    # Integriere die Funktion von -1/2 bis 3/2 und setze das Ergebnis gleich 1 (Bedingung für Wahrscheinlichkeitsdichte)
-    c, _ = quad(integrand, -1/2, 3/2)
-    return 1 / c
+# Apfelmasse Daten
+data = list(map(int, input("Bitte geben Sie die Massen der Äpfel ein (getrennt durch '&'): ").split('&')))
 
-def probability_X_equals_1(c):
-    return f(1, c)
+# Mittelwert (Erwartungswert)
+mean = np.mean(data)
+print(f'Punktschätzungen für Erwartungswert, 𝑥̄ = {mean:.2f} g')
 
-def probability_X_greater_than_minus_326(c):
-    from scipy.integrate import quad
-    from functools import partial
+# Unverzerrte Stichprobenvarianz
+variance = np.var(data, ddof=1)
+print(f'Punktschätzungen für Varianz, 𝑠² = {variance:.2f} g²')
 
-    # Definieren der Funktion, die integriert werden soll
-    integrand = partial(f, c=c)
+# Konfidenzniveau
+alpha = 0.05 # für 95% Konfidenzintervall
 
-    # Integriere die Funktion von -∞ bis -326, um die Wahrscheinlichkeit P(X >= -326) zu berechnen
-    probability, _ = quad(integrand, float('-inf'), -326)
-    return probability
+# Konfidenzintervall für den Mittelwert
+sem = stats.sem(data)
+ci_mean = stats.t.interval(1-alpha, len(data)-1, loc=mean, scale=sem)
+print(f'Konfidenzintervall für Erwartungswert, {ci_mean[0]:.2f} ≤ 𝜇 ≤ {ci_mean[1]:.2f}')
 
-def expected_value(c):
-    from scipy.integrate import quad
-    from functools import partial
-
-    # Definieren der Funktion, die integriert werden soll
-    integrand = partial(lambda x, c: x * f(x, c), c=c)
-
-    # Integriere die Funktion von -∞ bis ∞, um den Erwartungswert zu berechnen
-    expectation, _ = quad(integrand, float('-inf'), float('inf'))
-    return expectation
-
-if __name__ == "__main__":
-    c = calculate_c()
-
-    probability_X_equals_1_result = probability_X_equals_1(c)
-    probability_X_greater_than_minus_326_result = probability_X_greater_than_minus_326(c)
-    expected_value_result = expected_value(c)
-
-    print("𝑃(𝑋=1) =", probability_X_equals_1_result)
-    print("𝑃(𝑋≥−326) =", probability_X_greater_than_minus_326_result)
-    print("𝜇𝑋 =", expected_value_result)
+# Konfidenzintervall für die Varianz
+df = len(data) - 1
+ci_variance = [df * variance / stats.chi2.ppf(1 - alpha/2, df),
+               df * variance / stats.chi2.ppf(alpha/2, df)]
+print(f'Konfidenzintervall für Varianz, 𝜎² gilt {ci_variance[0]:.2f} ≤ 𝜎² ≤ {ci_variance[1]:.2f}')

@@ -1,11 +1,3 @@
-'''
-Created on 15.11.2021
-
-@author: Ramona Glötter
-'''
-
-# Quelle der Wörter: https://de.wikipedia.org/wiki/Liste_der_h%C3%A4ufigsten_W%C3%B6rter_der_deutschen_Sprache
-
 def specials(text):
     
     text_without_special = ""

@@ -1,2 +1,0 @@
-def primfaktorzerlegung(n):
-    pass
