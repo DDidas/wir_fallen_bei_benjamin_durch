@@ -5,7 +5,7 @@ def round_to_nearest_quarter(x):
     return round(x * 4) / 4
 
 # Benutzereingaben abfragen
-matrix_string = input("Bitte geben Sie die Matrix ein: ")
+matrix_string = input("Bitte geben Sie die Matrix ein (eingabe alles in {}, außer ketztes Backslash(cr): ")
 interval = input("Bitte geben Sie das Intervall ein (Format: x-y): ")
 sequence_length = int(input("Bitte geben Sie die Länge der Folge ein: "))
 
