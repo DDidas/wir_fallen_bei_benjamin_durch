@@ -12,7 +12,7 @@ def calculate_c():
     integrand = partial(f, c=1)  # Parameter c vorübergehend als 1 setzen
 
     # Integriere die Funktion von -1/2 bis 3/2 und setze das Ergebnis gleich 1 (Bedingung für Wahrscheinlichkeitsdichte)
-    c, _ = quad(integrand, -1/2, 3/2)
+    c, _ = quad(integrand, -1/2, 3/2, points=[-1/2, 3/2], weight='sin')
     return 1 / c
 
 def probability_X_equals_1(c):
